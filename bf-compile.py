@@ -8,8 +8,8 @@ outputfile = open("bf-program.bin", "wb")
 # remove all whitespace, newlines, and comments (things that aren't bf instructions)
 with open("bf-program.bf", "r") as f:
     program = f.read().replace(' ', '').replace('\n', '').replace('\r', '').replace('\t', '').replace('\v', '').replace('\f', '')
-    # remove all comments (letters and numbers)
-    program = ''.join([i for i in program if not i.isalpha() and not i.isdigit()])
+    # remove all that are not bf instructions
+    program = ''.join([i for i in program if i in ['>', '<', '+', '-', '.', ',', '[', ']']])
 
 print(program)
 
