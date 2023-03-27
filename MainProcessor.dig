@@ -30,6 +30,10 @@
           <int>16</int>
         </entry>
         <entry>
+          <string>isProgramMemory</string>
+          <boolean>true</boolean>
+        </entry>
+        <entry>
           <string>Label</string>
           <string>ProgMem</string>
         </entry>
@@ -39,10 +43,17 @@
         </entry>
         <entry>
           <string>Data</string>
-          <data>400a,c00e,6001,1,4003,1,4007,1,400a,1,400b,1,400c,2005,e00d,2
-,4003,8000,2001,4002,8000,3,4002,8000,2001,4005,8000,1,4004,8000
-,1,4001,8000,2004,8000,3,8000,2001,6001,8000,6003,8000,2002,8000
-,2,4001,8000,1,6005,8000,8000,6003,8000,2003,4001</data>
+          <data>a000,1,4001,1,4001,2002,c022,6001,2,c008,6001,1,4001,1,4001,2002
+,e007,2001,c006,6001,2,4001,2002,e005,2,c006,6001,2001,4001,1
+,e005,1,c006,6001,2003,4001,3,e005,2004,e021,2</data>
+        </entry>
+        <entry>
+          <string>lastDataFile</string>
+          <file>C:\Users\Cole Johnson\OneDrive - rit.edu\Comp Org\InterpretationStationProcessor\bf-program.bin</file>
+        </entry>
+        <entry>
+          <string>autoReload</string>
+          <boolean>true</boolean>
         </entry>
       </elementAttributes>
       <pos x="60" y="420"/>
@@ -89,6 +100,10 @@
         <entry>
           <string>Bits</string>
           <int>16</int>
+        </entry>
+        <entry>
+          <string>InDefault</string>
+          <value v="10" z="false"/>
         </entry>
       </elementAttributes>
       <pos x="-360" y="740"/>
@@ -437,7 +452,7 @@
         </entry>
         <entry>
           <string>Frequency</string>
-          <int>100</int>
+          <int>5</int>
         </entry>
       </elementAttributes>
       <pos x="460" y="0"/>
@@ -677,7 +692,7 @@
     <visualElement>
       <elementName>Terminal</elementName>
       <elementAttributes/>
-      <pos x="1620" y="480"/>
+      <pos x="1600" y="480"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -747,7 +762,7 @@
     </wire>
     <wire>
       <p1 x="1560" y="520"/>
-      <p2 x="1620" y="520"/>
+      <p2 x="1600" y="520"/>
     </wire>
     <wire>
       <p1 x="1140" y="460"/>
@@ -851,7 +866,7 @@
     </wire>
     <wire>
       <p1 x="1460" y="480"/>
-      <p2 x="1620" y="480"/>
+      <p2 x="1600" y="480"/>
     </wire>
     <wire>
       <p1 x="-120" y="480"/>
@@ -947,7 +962,7 @@
     </wire>
     <wire>
       <p1 x="1580" y="500"/>
-      <p2 x="1620" y="500"/>
+      <p2 x="1600" y="500"/>
     </wire>
     <wire>
       <p1 x="1020" y="440"/>
