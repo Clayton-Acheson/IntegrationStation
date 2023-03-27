@@ -1,18 +1,29 @@
 #!/usr/bin/python
-# program="++++++++++[->+++>+++++++>++++++++++>+++++++++++>++++++++++++<<<<<]>>+++.<++.>>>++.<+++++.>++++.>+.<<<<.>>>.<-.---.<<.>>+.>-----..---.<<<+."
+#Hello World
+#program=">++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+."
+
+#Fibonacci
+#program=">++++[-<+++++++++++>]>,[>++++++[-<-------->]>+++++++++[-<<<[->+>+<<]>>[-<<+>>]>]<<[-<+>],]<<+++++.-----.+++++.----->-->+>+<<[-<.>>>[->+>+<<]<[->>>+<<<]>>[-<<+>>]>[->+<<<+>>]>[>>>>++++++++++<<<<[->+>>+>-[<-]<[->>+<<<<[->>>+<<<]>]<<]>+[-<+>]>>>[-]>[-<<<<+>>>>]<<<<]<[>++++++[<++++++++>-]<-.[-]<]<<<<]"
+
+#Hello World Tests -- https://esolangs.org/wiki/Brainfuck
+#Test2
+#program=">++++++++[-<+++++++++>]<.>>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+."
+
+#Test3
+#Wont work since we use 16 bit cells instead of 8 bit cells
+#program="--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+."
+
+#Test4 -- borked, probably the same
+#program="+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+."
+
+#Cell Size -- Prints cell size of interpreter
+program="++++++++[>++++++++<-]>[<++++>-]+<[>-<[>++++<-]>[<++++++++>-]<[>++++++++<-]+>[>++++++++++[>+++++<-]>+.-.[-]<<[-]<->]<[>>+++++++[>+++++++<-]>.+++++.[-]<<<-]] >[>++++++++[>+++++++<-]>.[-]<<-]<+++++++++++[>+++>+++++++++>+++++++++>+<<<<-]>-.>-.+++++++.+++++++++++.<.>>.++.+++++++..<-.>>-[[-]<]"
+
 endline=""
 
-infile = open("bf-program.bf", "r")
 outputfile = open("bf-program.bin", "wb")
 
-# remove all whitespace, newlines, and comments (things that aren't bf instructions)
-with open("bf-program.bf", "r") as f:
-    program = f.read().replace(' ', '').replace('\n', '').replace('\r', '').replace('\t', '').replace('\v', '').replace('\f', '')
-    # remove all that are not bf instructions
-    program = ''.join([i for i in program if i in ['>', '<', '+', '-', '.', ',', '[', ']']])
-
-print(program)
-
+prog_counter = 0
 def compile(i, count):
     opcode = ''
     if i == '>':
@@ -32,17 +43,24 @@ def compile(i, count):
     elif i == ']':
         opcode = '111'
 
+    global prog_counter
+
     if i == '.' or i == ',':
         binary = f'{opcode}{0:>013b}'
         binary_num = int(binary, 2)
         bytes = binary_num.to_bytes(2, 'little')
         for c in range(count):
             outputfile.write(bytes)
+            print(f'PC: {prog_counter:#06x}  {int(binary, 2):#06x}  {i}({count})')
+            prog_counter += 1
     else:
         binary = f'{opcode}{count:>013b}'
         binary_num = int(binary, 2)
         bytes = binary_num.to_bytes(2, 'little')
         outputfile.write(bytes)
+        print(f'PC: {prog_counter:#06x}  {int(binary, 2):#06x}  {i}({count})')
+        prog_counter += 1
+
 
 def find_end(start):
     last = program[start]
@@ -50,7 +68,7 @@ def find_end(start):
     jump = 0
     count = 1
     for index, inst in enumerate(program[start:]):
-        if last != inst:
+        if last != inst or inst in ['[', ']', '.', ',']:
             jump += 1
         if inst == '[':
             count += 1
@@ -67,7 +85,7 @@ def find_start(start):
     jump = 0
     count = 1
     for index, inst in reversed(list(enumerate(program[:start]))):
-        if last != inst:
+        if last != inst or inst in ['[', ']', '.', ',']:
             jump += 1
         if inst == ']':
             count += 1
@@ -99,5 +117,4 @@ for index, inst in enumerate(program):
                 compile(last_instruction, addup)
             addup = 1
     last_instruction = inst
-print("")
 outputfile.close()
