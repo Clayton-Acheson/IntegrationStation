@@ -11,6 +11,10 @@
       <values class="BoolTable">00000011</values>
     </result>
     <result>
+      <name>PCsub</name>
+      <values class="BoolTable">00000001</values>
+    </result>
+    <result>
       <name>DataSRC</name>
       <values class="BoolTable">00000100</values>
     </result>
